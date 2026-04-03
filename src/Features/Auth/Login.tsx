@@ -1,8 +1,22 @@
 import checkIcon from "../../assets/icons/checked.png";
 import rightArrowIcon from "../../assets/icons/right-arrow.png";
 import "./Components/Login.css";
+import { useState } from "react";
+import { loginUser } from "../Auth/Redux/AuthReducer";
+import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 
 export default function Login() {
+  const dispatch = useAppDispatch();
+  const { loading, error, user } = useAppSelector((state) => state.auth);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(loginUser({ username, password }));
+  };
+
   return (
     <section className="login">
       <div className="blur-component">
@@ -38,14 +52,18 @@ export default function Login() {
             type="text"
             className="username-field"
             placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"
             className="password-field"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="continue-button">
-            <h2>Continue</h2>
+          <button className="continue-button" onClick={handleLogin}>
+            <h2>{loading ? "Loading..." : "Continue"}</h2>
             <img src={rightArrowIcon} alt="Arrow" />
           </button>
 
@@ -57,6 +75,8 @@ export default function Login() {
           </button>
         </div>
       </div>
+      {error && <p>{error}</p>}
+      {user && <p>Welcome {user.username}</p>}
     </section>
   );
 }
