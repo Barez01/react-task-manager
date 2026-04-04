@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { loginUser } from "../Auth/Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
+import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -73,14 +74,17 @@ export default function Login() {
           />
           <button className="continue-button" onClick={handleLogin}>
             <h2>{loading ? "Loading..." : "Continue"}</h2>
-            <img src={rightArrowIcon} alt="Arrow" />
+            {ArrowIcon({ color: "#fff", size: 32 })}
           </button>
 
           <div className="divider"></div>
 
-          <button className="other-button" onClick={() => navigate(ROUTES.SIGNUP.path)}>
+          <button
+            className="other-button"
+            onClick={() => navigate(ROUTES.SIGNUP.path)}
+          >
             <h2>Create Account</h2>
-            <img src={rightArrowIcon} alt="Arrow" />
+            {ArrowIcon({ color: "#000", size: 32 })}
           </button>
         </div>
       </div>
