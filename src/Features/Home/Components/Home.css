@@ -1,0 +1,6 @@
+.home > .blur-component {
+  display: flex;
+  overflow: hidden;
+  height: calc(100vh - 50px);
+  width: calc(100vw - 50px);
+}

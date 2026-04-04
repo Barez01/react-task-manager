@@ -11,6 +11,8 @@
 .login > .blur-component {
   display: flex;
   overflow: hidden;
+  height: 80vh;
+  width: 90vw;
 }
 
 /* LEFT SIDE */
