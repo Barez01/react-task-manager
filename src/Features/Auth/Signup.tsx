@@ -7,15 +7,16 @@ import { loginUser } from "../Auth/Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
 
-export default function Login() {
+export default function Signup() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { loading, error, user } = useAppSelector((state) => state.auth);
 
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(loginUser({ username, password }));
   };
@@ -55,8 +56,14 @@ export default function Login() {
         </div>
 
         <div className="right-component">
-          <h6>Welcome back!</h6>
-          <h4>Login to your account</h4>
+          <h4>Create your account</h4>
+          <input
+            type="text"
+            className="name-field"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
           <input
             type="text"
             className="username-field"
@@ -71,7 +78,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="continue-button" onClick={handleLogin}>
+          <button className="continue-button" onClick={handleSignup}>
             <h2>{loading ? "Loading..." : "Continue"}</h2>
             <img src={rightArrowIcon} alt="Arrow" />
           </button>
@@ -79,7 +86,7 @@ export default function Login() {
           <div className="divider"></div>
 
           <button className="other-button" onClick={() => navigate(ROUTES.SIGNUP.path)}>
-            <h2>Create Account</h2>
+            <h2>Login</h2>
             <img src={rightArrowIcon} alt="Arrow" />
           </button>
         </div>
