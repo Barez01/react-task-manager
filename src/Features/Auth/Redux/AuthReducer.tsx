@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 /* ================= TYPES ================= */
 
@@ -39,8 +40,7 @@ export const loginUser = createAsyncThunk<
   try {
     const response = await axios.post("http://localhost:5000/login", userData);
 
-    // optional: save token
-    localStorage.setItem("token", response.data.token);
+    Cookies.set("access_token", response.data.token);
 
     return response.data;
   } catch (error: any) {

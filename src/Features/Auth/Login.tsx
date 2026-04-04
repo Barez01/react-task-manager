@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import checkIcon from "../../assets/icons/checked.png";
 import rightArrowIcon from "../../assets/icons/right-arrow.png";
 import "./Components/Login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { loginUser } from "../Auth/Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { loading, error, user } = useAppSelector((state) => state.auth);
 
@@ -16,6 +18,12 @@ export default function Login() {
     e.preventDefault();
     dispatch(loginUser({ username, password }));
   };
+
+  useEffect(() => {
+    if (user !== null) {
+      navigate("/home");
+    }
+  }, [user !== null, navigate]);
 
   return (
     <section className="login">

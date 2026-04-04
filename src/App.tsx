@@ -10,6 +10,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path={ROUTES.LOGIN.path} element={ROUTES.LOGIN.element}></Route>
+        <Route path={ROUTES.HOME.path} element={ROUTES.HOME.element}></Route>
       </Routes>
     </BrowserRouter>
     </Provider>
