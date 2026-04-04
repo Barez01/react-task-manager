@@ -1,7 +1,15 @@
-import Login from "../Features/Auth/Login"
-import Home from "../Features/Home/Home"
+import Login from "../Features/Auth/Login";
+import Home from "../Features/Home/Home";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const ROUTES = {
-    LOGIN: { path: "/", element: <Login/>},
-    HOME: { path: "/home", element: <Home/>},
-}
+  LOGIN: { path: "/login", element: <Login /> },
+  HOME: {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
+  },
+};
