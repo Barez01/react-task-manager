@@ -43,13 +43,8 @@
   margin-bottom: 15px;
 }
 
-.motos img {
-  width: 18px;
-  margin-right: 10px;
-}
-
 .motos h6 {
-  margin: 0;
+  margin-left: 10px;
   font-weight: 400;
   font-size: 14px;
 }
@@ -58,6 +53,7 @@
 .moto-2,
 .moto-3 {
   display: flex;
+  align-items: center;
   margin-right: 35px;
 }
 

@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import checkIcon from "../../assets/icons/checked.png";
-import rightArrowIcon from "../../assets/icons/right-arrow.png";
 import "./Components/Login.css";
 import { useState, useEffect } from "react";
 import { loginUser } from "../Auth/Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
+import { CheckIcon } from "../../Constants/Icons/check_icon";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -41,15 +40,15 @@ export default function Login() {
           </p>
           <div className="motos">
             <div className="moto-1">
-              <img src={checkIcon} alt="Check Icon" />
+              {CheckIcon({ color: "#fff" })}
               <h6>Safe & Secure</h6>
             </div>
             <div className="moto-2">
-              <img src={checkIcon} alt="Check Icon" />
+              {CheckIcon({ color: "#fff" })}
               <h6>Fast & Reliable</h6>
             </div>
             <div className="moto-3">
-              <img src={checkIcon} alt="Check Icon" />
+              {CheckIcon({ color: "#fff" })}
               <h6>Comprehensive Data</h6>
             </div>
           </div>
