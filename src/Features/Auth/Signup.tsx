@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./Components/Login.css";
 import { useState, useEffect } from "react";
-import { loginUser } from "../Auth/Redux/AuthReducer";
+import { loginUser, signupUser } from "../Auth/Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
@@ -18,7 +18,7 @@ export default function Signup() {
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(loginUser({ username, password }));
+    dispatch(signupUser({ name, username, password }));
   };
 
   useEffect(() => {
@@ -41,15 +41,15 @@ export default function Signup() {
           </p>
           <div className="motos">
             <div className="moto-1">
-              {CheckIcon({color: "#fff"})}
+              {CheckIcon({ color: "#fff" })}
               <h6>Safe & Secure</h6>
             </div>
             <div className="moto-2">
-              {CheckIcon({color: "#fff"})}
+              {CheckIcon({ color: "#fff" })}
               <h6>Fast & Reliable</h6>
             </div>
             <div className="moto-3">
-              {CheckIcon({color: "#fff"})}
+              {CheckIcon({ color: "#fff" })}
               <h6>Comprehensive Data</h6>
             </div>
           </div>

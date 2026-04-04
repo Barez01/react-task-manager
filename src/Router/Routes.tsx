@@ -8,8 +8,7 @@ export const ROUTES = {
     path: "/",
     element: (
       <ProtectedRoute>
-        <Signup />
-        {/* <Home /> */}
+        <Home />
       </ProtectedRoute>
     ),
   },

@@ -11,6 +11,12 @@ interface User {
   token: string;
 }
 
+interface SignupInput {
+  name: string;
+  username: string;
+  password: string;
+}
+
 interface LoginInput {
   username: string;
   password: string;
@@ -41,6 +47,28 @@ export const loginUser = createAsyncThunk<
     const response = await axios.post("http://localhost:5000/login", userData);
 
     Cookies.set("access_token", response.data.token);
+    Cookies.set("name", response.data.token);
+    Cookies.set("username", response.data.token);
+
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(
+      error.response?.data?.message || "Login failed"
+    );
+  }
+});
+
+export const signupUser = createAsyncThunk<
+  User,
+  SignupInput,
+  { rejectValue: string }
+>("auth/signupUser", async (userData, thunkAPI) => {
+  try {
+    const response = await axios.post("http://localhost:5000/register", userData);
+
+    Cookies.set("access_token", response.data.token);
+    Cookies.set("name", response.data.token);
+    Cookies.set("username", response.data.token);
 
     return response.data;
   } catch (error: any) {
@@ -72,6 +100,18 @@ const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload ?? "Something went wrong";
+      })
+      .addCase(signupUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signupUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(signupUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? "Something went wrong";
       });
