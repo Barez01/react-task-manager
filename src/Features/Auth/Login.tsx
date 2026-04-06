@@ -28,7 +28,7 @@ export default function Login() {
 
   return (
     <section className="login">
-      <div className="blur-component">
+      <div className="blur-component animated-border">
         <div className="left-component">
           <h2>
             Save your daily notes <br />
