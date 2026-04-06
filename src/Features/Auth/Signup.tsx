@@ -29,7 +29,7 @@ export default function Signup() {
 
   return (
     <section className="login">
-      <div className="blur-component">
+      <div className="blur-component animated-border">
         <div className="left-component">
           <h2>
             Save your daily notes <br />
@@ -78,16 +78,20 @@ export default function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="continue-button" onClick={handleSignup}>
+          <button className="continue-button" onClick={() => handleSignup}>
             <h2>{loading ? "Loading..." : "Continue"}</h2>
-            {ArrowIcon({ color: "#fff", size: 32 })}
+            {loading ? (
+              <div className="loader"></div>
+            ) : (
+              ArrowIcon({ color: "#fff", size: 32 })
+            )}
           </button>
 
           <div className="divider"></div>
 
           <button
             className="other-button"
-            onClick={() => navigate(ROUTES.SIGNUP.path)}
+            onClick={() => navigate(ROUTES.LOGIN.path)}
           >
             <h2>Login</h2>
             {ArrowIcon({ color: "#000", size: 32 })}

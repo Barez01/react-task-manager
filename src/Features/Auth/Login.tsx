@@ -73,7 +73,11 @@ export default function Login() {
           />
           <button className="continue-button" onClick={handleLogin}>
             <h2>{loading ? "Loading..." : "Continue"}</h2>
-            {ArrowIcon({ color: "#fff", size: 32 })}
+            {loading ? (
+              <div className="loader"></div>
+            ) : (
+              ArrowIcon({ color: "#fff", size: 32 })
+            )}
           </button>
 
           <div className="divider"></div>

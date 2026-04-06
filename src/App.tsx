@@ -9,8 +9,9 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
       <Routes>
-        <Route path={ROUTES.LOGIN.path} element={ROUTES.LOGIN.element}></Route>
         <Route path={ROUTES.HOME.path} element={ROUTES.HOME.element}></Route>
+        <Route path={ROUTES.LOGIN.path} element={ROUTES.LOGIN.element}></Route>
+        <Route path={ROUTES.SIGNUP.path} element={ROUTES.SIGNUP.element}></Route>
       </Routes>
     </BrowserRouter>
     </Provider>
