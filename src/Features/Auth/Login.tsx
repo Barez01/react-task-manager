@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { CheckIcon } from "../../Constants/Icons/check_icon";
+import ErrorDialog from "../../Components/Dialogs/error_dialog";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ export default function Login() {
           </button>
         </div>
       </div>
-      {error && <p>{error}</p>}
+      {error && <ErrorDialog />}
       {user && <p>Welcome {user.username}</p>}
     </section>
   );
