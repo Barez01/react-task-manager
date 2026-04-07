@@ -88,6 +88,12 @@ const authSlice = createSlice({
       state.user = null;
       Cookies.remove('access_token');
     },
+    setError: (state, action) => {
+    state.error = action.payload;
+  },
+  clearError: (state) => {
+    state.error = null;
+  }
   },
   extraReducers: (builder) => {
     builder
@@ -118,5 +124,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setError, clearError } = authSlice.actions;
 export default authSlice.reducer;

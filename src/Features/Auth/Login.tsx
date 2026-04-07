@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./Components/Login.css";
 import { useState, useEffect } from "react";
-import { loginUser } from "../Auth/Redux/AuthReducer";
+import { loginUser, setError } from "../Auth/Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
@@ -18,6 +18,10 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!username || !password) {
+      dispatch(setError("Username and password are required"));
+      return;
+    }
     dispatch(loginUser({ username, password }));
   };
 
