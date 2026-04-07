@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { CheckIcon } from "../../Constants/Icons/check_icon";
+import ErrorDialog from "../../Components/Dialogs/error_dialog";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -78,7 +79,7 @@ export default function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="continue-button" onClick={() => handleSignup}>
+          <button className="continue-button" onClick={handleSignup}>
             <h2>{loading ? "Loading..." : "Continue"}</h2>
             {loading ? (
               <div className="loader"></div>
@@ -98,8 +99,7 @@ export default function Signup() {
           </button>
         </div>
       </div>
-      {error && <p>{error}</p>}
-      {user && <p>Welcome {user.username}</p>}
+      {error && <ErrorDialog message={error} />}
     </section>
   );
 }

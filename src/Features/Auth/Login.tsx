@@ -92,8 +92,7 @@ export default function Login() {
           </button>
         </div>
       </div>
-      {error && <ErrorDialog />}
-      {user && <p>Welcome {user.username}</p>}
+      {error && <ErrorDialog message={error} />}
     </section>
   );
 }
