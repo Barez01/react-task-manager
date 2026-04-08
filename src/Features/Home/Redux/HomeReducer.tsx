@@ -9,16 +9,16 @@ interface Task {
   description: string;
 }
 
-interface TaskWriteState {
-  note: Task | null;
+interface TaskState {
+  tasks: Task[];
   loading: boolean;
   error: string | null;
 }
 
 /* ================= INITIAL STATE ================= */
 
-const initialState: TaskWriteState = {
-  note: null,
+const initialState: TaskState = {
+  tasks: [],
   loading: false,
   error: null,
 };
@@ -26,7 +26,7 @@ const initialState: TaskWriteState = {
 /* ================= ASYNC ACTION ================= */
 
 export const writeTask = createAsyncThunk<
-  Task,
+  number,
   Task,
   { rejectValue: string }
 >("auth/writeTask", async (noteData, thunkAPI) => {
@@ -45,7 +45,7 @@ export const writeTask = createAsyncThunk<
       },
     });
 
-    return response.data;
+    return response.status;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(
       error.response?.data?.message || "Task could not be saved"
@@ -56,9 +56,16 @@ export const writeTask = createAsyncThunk<
 /* ================= SLICE ================= */
 
 const homeSlice = createSlice({
-  name: "auth",
+  name: "task",
   initialState,
-  reducers: { },
+  reducers: {
+    setError: (state, action) => {
+    state.error = action.payload;
+  },
+  clearError: (state) => {
+    state.error = null;
+  },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(writeTask.pending, (state) => {
@@ -75,4 +82,5 @@ const homeSlice = createSlice({
   },
 });
 
+export const { setError, clearError } = homeSlice.actions;
 export default homeSlice.reducer;
