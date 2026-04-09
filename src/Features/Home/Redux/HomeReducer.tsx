@@ -29,20 +29,19 @@ export const writeTask = createAsyncThunk<
   number,
   Task,
   { rejectValue: string }
->("auth/writeTask", async (noteData, thunkAPI) => {
+>("task/writeTask", async (taskData, thunkAPI) => {
   try {
-    if (!noteData.description) {
+    if (!taskData.description) {
       return thunkAPI.rejectWithValue("No description is specified!");
     }
 
     const accessToken = Cookies.get("access_token");
-    console.log("TOKEN:", accessToken);
 
     const response = await axios.post(
       "http://localhost:5000/tasks",
       {
         title: "-",
-        description: noteData.description,
+        description: taskData.description,
       },
       {
         headers: {
@@ -56,6 +55,33 @@ export const writeTask = createAsyncThunk<
   } catch (error: any) {
     return thunkAPI.rejectWithValue(
       error.response?.data?.message || "Task could not be saved",
+    );
+  }
+});
+
+export const readTasks = createAsyncThunk<
+  Task[],
+  void,
+  { rejectValue: string }
+>("task/readTasks", async (_, thunkAPI) => {
+  try {
+
+    const accessToken = Cookies.get("access_token");
+
+    const response = await axios.get(
+      "http://localhost:5000/tasks",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+
+    return response.data.tasks;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(
+      error.response?.data?.message || "Tasks could not be returned",
     );
   }
 });
@@ -83,6 +109,18 @@ const homeSlice = createSlice({
         state.loading = false;
       })
       .addCase(writeTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload ?? "Something went wrong";
+      })
+      .addCase(readTasks.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(readTasks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tasks = action.payload;
+      })
+      .addCase(readTasks.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? "Something went wrong";
       });

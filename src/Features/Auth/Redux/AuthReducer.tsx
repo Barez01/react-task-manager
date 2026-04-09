@@ -46,7 +46,6 @@ export const loginUser = createAsyncThunk<
   try {
     const response = await axios.post("http://localhost:5000/login", userData);
 
-    console.log("TOKEN:", response.data.access_token);
     Cookies.set("access_token", response.data.access_token);
     Cookies.set("name", response.data.token);
     Cookies.set("username", response.data.token);
