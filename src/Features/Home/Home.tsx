@@ -4,19 +4,25 @@ import githubLogo from "../../assets/images/github-logo.png";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { useState, useEffect } from "react";
-import { writeTask, setError } from "../Home/Redux/HomeReducer";
+import { writeTask, setError, readTasks } from "../Home/Redux/HomeReducer";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.home);
+  const { loading, error, tasks } = useAppSelector((state) => state.home);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const handleTaskWrite = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(writeTask({ title, description }));
+
+    const result = dispatch(writeTask({ title, description }));
+
+    if (writeTask.fulfilled.match(result)) {
+      dispatch(readTasks());
+      setDescription("");
+    }
   };
 
   // useEffect(() => {
@@ -24,6 +30,10 @@ export default function Home() {
   //     navigate(ROUTES.HOME.path);
   //   }
   // }, [user !== null, navigate]);
+
+  useEffect(() => {
+    dispatch(readTasks());
+  }, [dispatch]);
 
   return (
     <section className="home">
@@ -60,7 +70,11 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="div2"></div>
+          <div className="div2">
+            {tasks.map((task) => (
+  <div key={task.description}>{task.title}</div>
+))}
+          </div>
           <a href="https://github.com/Barez01" target="_blank" className="div3">
             <h1>Follow me</h1>
             <p>
