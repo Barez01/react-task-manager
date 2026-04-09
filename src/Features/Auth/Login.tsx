@@ -18,10 +18,6 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username || !password) {
-      dispatch(setError("Username and password are required"));
-      return;
-    }
     dispatch(loginUser({ username, password }));
   };
 

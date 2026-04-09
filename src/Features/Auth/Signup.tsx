@@ -19,14 +19,6 @@ export default function Signup() {
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !username || !password) {
-      dispatch(
-        setError(
-          "To create an account you need to provide a name, username, and password",
-        ),
-      );
-      return;
-    }
     dispatch(signupUser({ name, username, password }));
   };
 

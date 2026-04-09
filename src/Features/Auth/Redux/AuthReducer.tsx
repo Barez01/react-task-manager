@@ -44,6 +44,10 @@ export const loginUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/loginUser", async (userData, thunkAPI) => {
   try {
+    if (!userData.username || !userData.password) {
+    return thunkAPI.rejectWithValue("Username and password are required");
+  }
+  
     const response = await axios.post("http://localhost:5000/login", userData);
 
     Cookies.set("access_token", response.data.access_token);
@@ -64,6 +68,10 @@ export const signupUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/signupUser", async (userData, thunkAPI) => {
   try {
+    if (!userData.name || !userData.username || !userData.password) {
+  return thunkAPI.rejectWithValue("All fields are required");
+}
+
     const response = await axios.post("http://localhost:5000/register", userData);
 
     Cookies.set("access_token", response.data.access_token);
