@@ -65,13 +65,16 @@ export default function Home() {
             </div>
           </div>
           <div className="div2"></div>
-          <div className="div3">
+          <a href="https://github.com/Barez01" target="_blank" className="div3">
             <h1>Follow me</h1>
-            <p>If you find this project usefull, <br/>you can follow me</p>
+            <p>
+              If you find this project usefull, <br />
+              you can follow me
+            </p>
             <div className="image-container">
               <img src={githubLogo} alt="" />
             </div>
-          </div>
+          </a>
         </div>
       </div>
       {error && <ErrorDialog message={error} />}
