@@ -46,7 +46,8 @@ export const loginUser = createAsyncThunk<
   try {
     const response = await axios.post("http://localhost:5000/login", userData);
 
-    Cookies.set("access_token", response.data.token);
+    console.log("TOKEN:", response.data.access_token);
+    Cookies.set("access_token", response.data.access_token);
     Cookies.set("name", response.data.token);
     Cookies.set("username", response.data.token);
 
@@ -66,7 +67,7 @@ export const signupUser = createAsyncThunk<
   try {
     const response = await axios.post("http://localhost:5000/register", userData);
 
-    Cookies.set("access_token", response.data.token);
+    Cookies.set("access_token", response.data.access_token);
     Cookies.set("name", response.data.token);
     Cookies.set("username", response.data.token);
 

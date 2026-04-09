@@ -5,6 +5,7 @@ import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { useState, useEffect } from "react";
 import { writeTask, setError } from "../Home/Redux/HomeReducer";
+import ErrorDialog from "../../Components/Dialogs/error_dialog";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleTaskWrite = (e: React.FormEvent) => {
     e.preventDefault();
     if (!description) {
       dispatch(setError("No description is specified!"));
@@ -50,10 +51,10 @@ export default function Home() {
                 type="text"
                 className="description-field"
                 placeholder="Type something..."
-                // value={username}
-                // onChange={(e) => setUsername(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
-              <button className="note-submit-button">
+              <button className="note-submit-button" onClick={handleTaskWrite}>
                 {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                 {loading ? (
                   <div className="loader"></div>
@@ -73,6 +74,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {error && <ErrorDialog message={error} />}
     </section>
   );
 }

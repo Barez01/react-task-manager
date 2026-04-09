@@ -31,24 +31,31 @@ export const writeTask = createAsyncThunk<
   { rejectValue: string }
 >("auth/writeTask", async (noteData, thunkAPI) => {
   try {
-    const accessToken = Cookies.get("access_token");
+    if (!noteData.description) {
+      return thunkAPI.rejectWithValue("No description is specified!");
+    }
 
-    const response = await axios.post("http://localhost:5000/tasks", 
-        {
-          title: noteData.title,
-          description: noteData.description,
-        },
-        {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+    const accessToken = Cookies.get("access_token");
+    console.log("TOKEN:", accessToken);
+
+    const response = await axios.post(
+      "http://localhost:5000/tasks",
+      {
+        title: "-",
+        description: noteData.description,
       },
-    });
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
 
     return response.status;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(
-      error.response?.data?.message || "Task could not be saved"
+      error.response?.data?.message || "Task could not be saved",
     );
   }
 });
@@ -60,11 +67,11 @@ const homeSlice = createSlice({
   initialState,
   reducers: {
     setError: (state, action) => {
-    state.error = action.payload;
-  },
-  clearError: (state) => {
-    state.error = null;
-  },
+      state.error = action.payload;
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
