@@ -78,7 +78,9 @@ export default function Home() {
             {tasks.map((task) => (
               <div className="task-container" key={task.id}>
                 <div className="task-title">
-                  {task.date}
+                  <p className="task-date">
+                    {new Date(task.date).toLocaleString()}
+                  </p>
                 </div>
                 <p className="task-description">
                   {task.description}
