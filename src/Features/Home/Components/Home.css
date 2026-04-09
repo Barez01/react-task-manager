@@ -107,8 +107,36 @@
   text-overflow: ellipsis; /* optional */
 }
 
+.div2 .task-container .task-title{
+  display: flex;
+  align-items: center;
+}
+
 .div2 .task-container .task-title .task-date {
   font-weight: bold;
+  margin-right: auto;
+}
+
+.div2 .task-container .task-title button {
+  margin-left: 10px;
+  background-color: white;
+  border-radius: 100px;
+  padding: 5px;
+}
+
+.div2 .task-container .task-description {
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+
+  width: 100%;
+  font: inherit;
+  color: inherit;
+
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .home .div3 {

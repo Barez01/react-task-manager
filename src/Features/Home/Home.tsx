@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { useState, useEffect } from "react";
 import { writeTask, setError, readTasks } from "../Home/Redux/HomeReducer";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
+import { DeleteIcon } from "../../Constants/Icons/delete_icon";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -17,7 +18,9 @@ export default function Home() {
   const handleTaskWrite = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const result = await dispatch(writeTask({ id: 0, title, description, date: "", }));
+    const result = await dispatch(
+      writeTask({ id: 0, title, description, date: "" }),
+    );
 
     if (writeTask.fulfilled.match(result)) {
       dispatch(readTasks());
@@ -81,10 +84,32 @@ export default function Home() {
                   <p className="task-date">
                     {new Date(task.date).toLocaleString()}
                   </p>
+                  <button
+                    className="note-update-button"
+                    onClick={handleTaskWrite}
+                  >
+                    {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
+                    {loading ? (
+                      <div className="loader"></div>
+                    ) : (
+                      ArrowIcon({ color: "#000", size: 16, direction: "up" })
+                    )}
+                  </button>
+                  <button
+                    className="note-delete-button"
+                    onClick={handleTaskWrite}
+                  >
+                    {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
+                    {loading ? (
+                      <div className="loader"></div>
+                    ) : (
+                      DeleteIcon({ color: "#ff0000", size: 16 })
+                    )}
+                  </button>
                 </div>
-                <p className="task-description">
+                <div contentEditable className="task-description">
                   {task.description}
-                </p>
+                </div>
               </div>
             ))}
           </div>
