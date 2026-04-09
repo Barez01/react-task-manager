@@ -17,13 +17,15 @@ export default function Home() {
   const handleTaskWrite = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const result = await dispatch(writeTask({ title, description }));
+    const result = await dispatch(writeTask({ id: 0, title, description, date: "", }));
 
     if (writeTask.fulfilled.match(result)) {
       dispatch(readTasks());
       setDescription("");
-    }else{
-      console.log(`did not match: ${writeTask.fulfilled.match(result)}, ${writeTask.fulfilled}, `);
+    } else {
+      console.log(
+        `did not match: ${writeTask.fulfilled.match(result)}, ${writeTask.fulfilled}, `,
+      );
     }
   };
 
@@ -74,8 +76,15 @@ export default function Home() {
           </div>
           <div className="div2">
             {tasks.map((task) => (
-  <div key={task.description}>{task.title}</div>
-))}
+              <div className="" key={task.id}>
+                <div className="task-title">
+                  {task.date}
+                </div>
+                <p className="task-description">
+                  {task.description}
+                </p>
+              </div>
+            ))}
           </div>
           <a href="https://github.com/Barez01" target="_blank" className="div3">
             <h1>Follow me</h1>

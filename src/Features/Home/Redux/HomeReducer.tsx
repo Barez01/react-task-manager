@@ -5,8 +5,10 @@ import Cookies from "js-cookie";
 /* ================= TYPES ================= */
 
 interface Task {
+  id: number;
   title: string;
   description: string;
+  date: string;
 }
 
 interface TaskState {
