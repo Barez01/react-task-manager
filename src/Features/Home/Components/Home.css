@@ -16,7 +16,7 @@
 
 .div1 {
   grid-row: span 5 / span 5;
-  border-radius: 30px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@
   grid-column: span 3 / span 3;
   grid-row: span 7 / span 7;
   /* background-color: red; */
-  border-radius: 30px;
+  border-radius: 20px;
   /* background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px); */
@@ -93,7 +93,7 @@
   grid-row: span 2 / span 2;
   grid-row-start: 6;
   background-color: #eb6351;
-  border-radius: 30px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;

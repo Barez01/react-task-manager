@@ -16,10 +16,6 @@ export default function Home() {
 
   const handleTaskWrite = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!description) {
-      dispatch(setError("No description is specified!"));
-      return;
-    }
     dispatch(writeTask({ title, description }));
   };
 
@@ -68,7 +64,7 @@ export default function Home() {
           <a href="https://github.com/Barez01" target="_blank" className="div3">
             <h1>Follow me</h1>
             <p>
-              If you find this project usefull, <br />
+              If you find this project useful, <br />
               you can follow me
             </p>
             <div className="image-container">
