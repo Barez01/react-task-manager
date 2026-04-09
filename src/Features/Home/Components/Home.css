@@ -23,21 +23,6 @@
   padding-top: 12.5%;
 }
 
-.div2 {
-  grid-column: span 3 / span 3;
-  grid-row: span 7 / span 7;
-  /* background-color: red; */
-  border-radius: 20px;
-  /* background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px); */
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(255, 255, 255, 0.2) 100%
-  );
-}
-
 .home .div1 img {
   border-radius: 50%;
   width: 50%;
@@ -87,6 +72,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.div2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  align-items: flex-start;   /* already good */
+  align-content: flex-start; /* 🔥 THIS fixes row spacing */
+
+  grid-column: span 3 / span 3;
+  grid-row: span 7 / span 7;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+}
+
+.div2 .task-container {
+  background-color: blue;
+  padding: 10px;
+  border-radius: 10px;
+
+  display: inline-block;     /* 🔥 important */
+  width: auto;               /* 🔥 natural width */
+  max-width: 100%;           /* 🔥 only limit by parent */
+
+  white-space: nowrap;       /* 🔥 stay in ONE LINE */
+  overflow: hidden;
+  text-overflow: ellipsis;   /* optional */
 }
 
 .home .div3 {

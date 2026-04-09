@@ -76,7 +76,7 @@ export default function Home() {
           </div>
           <div className="div2">
             {tasks.map((task) => (
-              <div className="" key={task.id}>
+              <div className="task-container" key={task.id}>
                 <div className="task-title">
                   {task.date}
                 </div>
