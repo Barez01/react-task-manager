@@ -14,14 +14,16 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleTaskWrite = (e: React.FormEvent) => {
+  const handleTaskWrite = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const result = dispatch(writeTask({ title, description }));
+    const result = await dispatch(writeTask({ title, description }));
 
     if (writeTask.fulfilled.match(result)) {
       dispatch(readTasks());
       setDescription("");
+    }else{
+      console.log(`did not match: ${writeTask.fulfilled.match(result)}, ${writeTask.fulfilled}, `);
     }
   };
 
