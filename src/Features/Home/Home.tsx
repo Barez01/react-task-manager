@@ -4,13 +4,14 @@ import githubLogo from "../../assets/images/github-logo.png";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { useState, useEffect } from "react";
-import { writeTask, setError, readTasks } from "../Home/Redux/HomeReducer";
+import { writeTask, setError, readTasks, updateTask } from "../Home/Redux/HomeReducer";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
 import { DeleteIcon } from "../../Constants/Icons/delete_icon";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { loading, error, tasks } = useAppSelector((state) => state.home);
+  const { writeLoading, readLoading, updateLoading, error, tasks } =
+    useAppSelector((state) => state.home);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -25,6 +26,27 @@ export default function Home() {
     if (writeTask.fulfilled.match(result)) {
       dispatch(readTasks());
       setDescription("");
+    }
+  };
+
+  const handleTaskUpdate = async (
+    e: React.FormEvent,
+    id: number,
+    newDescription: string,
+  ) => {
+    e.preventDefault();
+
+    const result = await dispatch(
+      updateTask({
+        id: id,
+        title: title,
+        description: newDescription,
+        date: "",
+      }),
+    );
+
+    if (writeTask.fulfilled.match(result)) {
+      dispatch(readTasks());
     } else {
       console.log(
         `did not match: ${writeTask.fulfilled.match(result)}, ${writeTask.fulfilled}, `,
@@ -69,7 +91,7 @@ export default function Home() {
               />
               <button className="note-submit-button" onClick={handleTaskWrite}>
                 {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
-                {loading ? (
+                {writeLoading ? (
                   <div className="loader"></div>
                 ) : (
                   ArrowIcon({ color: "#fff", size: 32 })
@@ -86,10 +108,15 @@ export default function Home() {
                   </p>
                   <button
                     className="note-update-button"
-                    onClick={handleTaskWrite}
+                    onClick={(e) => {
+                      const updatedText =
+                        document.getElementById(`task-${task.id}`)?.innerText ??
+                        "";
+                      handleTaskUpdate(e, task.id, updatedText ?? "");
+                    }}
                   >
                     {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
-                    {loading ? (
+                    {updateLoading ? (
                       <div className="loader"></div>
                     ) : (
                       ArrowIcon({ color: "#000", size: 16, direction: "up" })
@@ -100,14 +127,18 @@ export default function Home() {
                     onClick={handleTaskWrite}
                   >
                     {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
-                    {loading ? (
+                    {updateLoading ? (
                       <div className="loader"></div>
                     ) : (
                       DeleteIcon({ color: "#ff0000", size: 16 })
                     )}
                   </button>
                 </div>
-                <div contentEditable className="task-description">
+                <div
+                  contentEditable
+                  className="task-description"
+                  id={`task-${task.id}`}
+                >
                   {task.description}
                 </div>
               </div>
