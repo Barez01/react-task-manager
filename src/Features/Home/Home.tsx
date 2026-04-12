@@ -124,8 +124,33 @@ export default function Home() {
               </button>
             </div>
           </div>
-          {!readLoading ? (
-            <div className="shimmer"></div>
+          {readLoading ? (
+            <div className="shimmer-loader">
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+              <div className=""></div>
+            </div>
           ) : (
             <div className="div2">
               {tasks.map((task) => (
