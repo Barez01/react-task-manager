@@ -15,7 +15,8 @@ interface TaskState {
   tasks: Task[];
   readLoading: boolean;
   writeLoading: boolean;
-  updateLoading: boolean;
+  updateLoading: number | null;
+  deleteLoading: number | null;
   error: string | null;
 }
 
@@ -25,7 +26,8 @@ const initialState: TaskState = {
   tasks: [],
   readLoading: false,
   writeLoading: false,
-  updateLoading: false,
+  updateLoading: null,
+  deleteLoading: null,
   error: null,
 };
 
@@ -71,18 +73,14 @@ export const readTasks = createAsyncThunk<
   { rejectValue: string }
 >("task/readTasks", async (_, thunkAPI) => {
   try {
-
     const accessToken = Cookies.get("access_token");
 
-    const response = await axios.get(
-      "http://localhost:5000/tasks",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
+    const response = await axios.get("http://localhost:5000/tasks", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
-    );
+    });
 
     return response.data.tasks;
   } catch (error: any) {
@@ -127,6 +125,32 @@ export const updateTask = createAsyncThunk<
   }
 });
 
+export const deleteTask = createAsyncThunk<
+  number,
+  Task,
+  { rejectValue: string }
+>("task/deleteTask", async (taskData, thunkAPI) => {
+  try {
+    const accessToken = Cookies.get("access_token");
+
+    const response = await axios.delete("http://localhost:5000/tasks", {
+      data: {
+        id: taskData.id,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return response.status;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(
+      error.response?.data?.message || "Task could not be deleted",
+    );
+  }
+});
+
 /* ================= SLICE ================= */
 
 const homeSlice = createSlice({
@@ -159,21 +183,34 @@ const homeSlice = createSlice({
       })
       .addCase(readTasks.fulfilled, (state, action) => {
         state.readLoading = false;
-        state.tasks = action.payload;
+        state.tasks = action.payload.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
       })
       .addCase(readTasks.rejected, (state, action) => {
         state.readLoading = false;
         state.error = action.payload ?? "Something went wrong";
       })
-      .addCase(updateTask.pending, (state) => {
-        state.updateLoading = true;
+      .addCase(updateTask.pending, (state, action) => {
+        state.updateLoading = action.meta.arg.id;
         state.error = null;
       })
       .addCase(updateTask.fulfilled, (state) => {
-        state.updateLoading = false;
+        state.updateLoading = null;
       })
       .addCase(updateTask.rejected, (state, action) => {
-        state.updateLoading = false;
+        state.updateLoading = null;
+        state.error = action.payload ?? "Something went wrong";
+      })
+      .addCase(deleteTask.pending, (state, action) => {
+        state.deleteLoading = action.meta.arg.id;
+        state.error = null;
+      })
+      .addCase(deleteTask.fulfilled, (state) => {
+        state.deleteLoading = null;
+      })
+      .addCase(deleteTask.rejected, (state, action) => {
+        state.deleteLoading = null;
         state.error = action.payload ?? "Something went wrong";
       });
   },

@@ -4,14 +4,26 @@ import githubLogo from "../../assets/images/github-logo.png";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { useState, useEffect } from "react";
-import { writeTask, setError, readTasks, updateTask } from "../Home/Redux/HomeReducer";
+import {
+  writeTask,
+  setError,
+  readTasks,
+  updateTask,
+  deleteTask,
+} from "../Home/Redux/HomeReducer";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
 import { DeleteIcon } from "../../Constants/Icons/delete_icon";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { writeLoading, readLoading, updateLoading, error, tasks } =
-    useAppSelector((state) => state.home);
+  const {
+    writeLoading,
+    readLoading,
+    updateLoading,
+    deleteLoading,
+    error,
+    tasks,
+  } = useAppSelector((state) => state.home);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -45,12 +57,25 @@ export default function Home() {
       }),
     );
 
-    if (writeTask.fulfilled.match(result)) {
+    if (updateTask.fulfilled.match(result)) {
       dispatch(readTasks());
-    } else {
-      console.log(
-        `did not match: ${writeTask.fulfilled.match(result)}, ${writeTask.fulfilled}, `,
-      );
+    }
+  };
+
+  const handleTaskDelete = async (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+
+    const result = await dispatch(
+      deleteTask({
+        id: id,
+        title: "",
+        description: "",
+        date: "",
+      }),
+    );
+
+    if (deleteTask.fulfilled.match(result)) {
+      dispatch(readTasks());
     }
   };
 
@@ -99,51 +124,57 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="div2">
-            {tasks.map((task) => (
-              <div className="task-container" key={task.id}>
-                <div className="task-title">
-                  <p className="task-date">
-                    {new Date(task.date).toLocaleString()}
-                  </p>
-                  <button
-                    className="note-update-button"
-                    onClick={(e) => {
-                      const updatedText =
-                        document.getElementById(`task-${task.id}`)?.innerText ??
-                        "";
-                      handleTaskUpdate(e, task.id, updatedText ?? "");
-                    }}
+          {!readLoading ? (
+            <div className="shimmer"></div>
+          ) : (
+            <div className="div2">
+              {tasks.map((task) => (
+                <div className="task-container" key={task.id}>
+                  <div className="task-title">
+                    <p className="task-date">
+                      {new Date(task.date).toLocaleString()}
+                    </p>
+                    <button
+                      className="note-update-button"
+                      disabled={updateLoading === task.id}
+                      onClick={(e) => {
+                        const updatedText =
+                          document.getElementById(`task-${task.id}`)
+                            ?.innerText ?? "";
+                        handleTaskUpdate(e, task.id, updatedText ?? "");
+                      }}
+                    >
+                      {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
+                      {updateLoading === task.id ? (
+                        <div className="loader-small"></div>
+                      ) : (
+                        ArrowIcon({ color: "#000", size: 16, direction: "up" })
+                      )}
+                    </button>
+                    <button
+                      className="note-delete-button"
+                      disabled={deleteLoading === task.id}
+                      onClick={(e) => handleTaskDelete(e, task.id)}
+                    >
+                      {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
+                      {deleteLoading === task.id ? (
+                        <div className="loader-small"></div>
+                      ) : (
+                        DeleteIcon({ color: "#ff0000", size: 16 })
+                      )}
+                    </button>
+                  </div>
+                  <div
+                    contentEditable
+                    className="task-description"
+                    id={`task-${task.id}`}
                   >
-                    {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
-                    {updateLoading ? (
-                      <div className="loader"></div>
-                    ) : (
-                      ArrowIcon({ color: "#000", size: 16, direction: "up" })
-                    )}
-                  </button>
-                  <button
-                    className="note-delete-button"
-                    onClick={handleTaskWrite}
-                  >
-                    {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
-                    {updateLoading ? (
-                      <div className="loader"></div>
-                    ) : (
-                      DeleteIcon({ color: "#ff0000", size: 16 })
-                    )}
-                  </button>
+                    {task.description}
+                  </div>
                 </div>
-                <div
-                  contentEditable
-                  className="task-description"
-                  id={`task-${task.id}`}
-                >
-                  {task.description}
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
           <a href="https://github.com/Barez01" target="_blank" className="div3">
             <h1>Follow me</h1>
             <p>

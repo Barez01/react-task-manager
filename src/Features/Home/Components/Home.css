@@ -139,6 +139,14 @@
   word-break: break-word;
 }
 
+.home .reader-loader{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+
 .home .div3 {
   grid-row: span 2 / span 2;
   grid-row-start: 6;
