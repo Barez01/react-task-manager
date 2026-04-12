@@ -78,6 +78,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   align-items: flex-start; /* already good */
   align-content: flex-start; /* 🔥 THIS fixes row spacing */
@@ -91,6 +93,14 @@
     rgba(255, 255, 255, 0.2) 100%
   ); */
   color: white;
+}
+
+.div2::-webkit-scrollbar {
+  display: none;
+}
+
+.div2::-webkit-scrollbar {
+  display: none;
 }
 
 .div2 .task-container {
