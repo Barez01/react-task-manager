@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowIcon } from "../../../../Constants/Icons/arrow_icon";
+import "./ContinueButton.css";
 
 export default function ContinueButton({
   loading,

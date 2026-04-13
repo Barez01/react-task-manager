@@ -57,60 +57,11 @@
   font-size: 16px;
 }
 
-/* Button */
-.continue-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 20px 0px;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 100px;
-
-  background: black;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.4s;
-}
-
-.continue-button:hover,
-.other-button:hover {
-  width: 95%;
-  padding: 20px 25px;
-}
-
-.continue-button > img,
-.other-button > img {
-  width: 30px;
-}
-
 .right-component .divider {
   width: 75px;
   height: 5px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
-}
-
-.other-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 20px 0;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 100px;
-
-  background-color: white;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.4s;
-  border: 0px solid white;
 }
 
 /* ------------------------------------------------------------- */
