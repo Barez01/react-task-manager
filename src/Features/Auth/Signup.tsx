@@ -8,6 +8,7 @@ import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { CheckIcon } from "../../Constants/Icons/check_icon";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
 import AuthLeftComponent from "./Components/AuthLeftComponent/AuthLeftComponent";
+import ContinueButton, { OtherButton } from "./Components/ContinueButton/ContinueButton";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -57,24 +58,11 @@ export default function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="continue-button" onClick={handleSignup}>
-            <h2>{loading ? "Loading..." : "Continue"}</h2>
-            {loading ? (
-              <div className="loader"></div>
-            ) : (
-              ArrowIcon({ color: "#fff", size: 32 })
-            )}
-          </button>
+          <ContinueButton loading={loading} onClick={handleSignup} />
 
           <div className="divider"></div>
 
-          <button
-            className="other-button"
-            onClick={() => navigate(ROUTES.LOGIN.path)}
-          >
-            <h2>Login</h2>
-            {ArrowIcon({ color: "#000", size: 32 })}
-          </button>
+          <OtherButton route={ROUTES.LOGIN.path} />
         </div>
       </div>
       {error && <ErrorDialog message={error} />}
