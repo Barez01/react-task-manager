@@ -1,0 +1,43 @@
+/* LEFT SIDE */
+.left-component {
+  flex: 1;
+  padding: 100px;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.left-component h2 {
+  font-size: 54px;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.left-component p {
+  font-size: 24px;
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+/* Motos */
+.motos {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.motos h6 {
+  margin-left: 10px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.moto-1,
+.moto-2,
+.moto-3 {
+  display: flex;
+  align-items: center;
+  margin-right: 35px;
+}

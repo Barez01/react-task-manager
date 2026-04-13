@@ -7,6 +7,7 @@ import { ROUTES } from "../../Router/Routes";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { CheckIcon } from "../../Constants/Icons/check_icon";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
+import AuthLeftComponent from "./Components/AuthLeftComponent/AuthLeftComponent";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -31,30 +32,7 @@ export default function Signup() {
   return (
     <section className="login">
       <div className="blur-component animated-border">
-        <div className="left-component">
-          <h2>
-            Save your daily notes <br />
-            with Notefy app
-          </h2>
-          <p>
-            The most trust worthy collaborator to save your <br /> daily notes,
-            and make memroies.
-          </p>
-          <div className="motos">
-            <div className="moto-1">
-              {CheckIcon({ color: "#fff" })}
-              <h6>Safe & Secure</h6>
-            </div>
-            <div className="moto-2">
-              {CheckIcon({ color: "#fff" })}
-              <h6>Fast & Reliable</h6>
-            </div>
-            <div className="moto-3">
-              {CheckIcon({ color: "#fff" })}
-              <h6>Comprehensive Data</h6>
-            </div>
-          </div>
-        </div>
+        <AuthLeftComponent/>
 
         <div className="right-component">
           <h4>Create your account</h4>
