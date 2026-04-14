@@ -55,7 +55,7 @@ export default function TasksContainer() {
   };
 
   return (
-    <div className="div2">
+    <div className="tasks-container">
       {tasks.map((task) => (
         <div className="task-container" key={task.id}>
           <div className="task-title">
