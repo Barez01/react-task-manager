@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import Loader from "../../../../Components/AnimatedComponents/Loader/Loader";
 import { ArrowIcon } from "../../../../Constants/Icons/arrow_icon";
 import { DeleteIcon } from "../../../../Constants/Icons/delete_icon";
@@ -59,32 +60,22 @@ export default function TasksContainer() {
         <div className="task-container" key={task.id}>
           <div className="task-title">
             <p className="task-date">{new Date(task.date).toLocaleString()}</p>
-            <button
+            <ActionButton
               className="note-update-button"
-              disabled={updateLoading === task.id}
+              loading={updateLoading === task.id}
+              icon={ArrowIcon({ color: "#000", size: 16, direction: "up" })}
               onClick={(e) => {
                 const updatedText =
                   document.getElementById(`task-${task.id}`)?.innerText ?? "";
                 handleTaskUpdate(e, task.id, updatedText ?? "");
               }}
-            >
-              {updateLoading === task.id ? (
-                <Loader large={false} />
-              ) : (
-                ArrowIcon({ color: "#000", size: 16, direction: "up" })
-              )}
-            </button>
-            <button
+            />
+            <ActionButton
               className="note-delete-button"
-              disabled={deleteLoading === task.id}
+              loading={deleteLoading === task.id}
+              icon={DeleteIcon({ color: "#f00", size: 16 })}
               onClick={(e) => handleTaskDelete(e, task.id)}
-            >
-              {deleteLoading === task.id ? (
-                <Loader large={false} />
-              ) : (
-                DeleteIcon({ color: "#ff0000", size: 16 })
-              )}
-            </button>
+            />
           </div>
           <div
             contentEditable
@@ -96,5 +87,23 @@ export default function TasksContainer() {
         </div>
       ))}
     </div>
+  );
+}
+
+function ActionButton({
+  className,
+  loading,
+  icon,
+  onClick,
+}: {
+  className: string;
+  loading: boolean;
+  icon: JSX.Element;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}) {
+  return (
+    <button className={className} disabled={loading} onClick={onClick}>
+      {loading ? <Loader large={false} /> : icon}
+    </button>
   );
 }
