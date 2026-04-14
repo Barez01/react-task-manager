@@ -13,6 +13,7 @@ import {
 } from "../Home/Redux/HomeReducer";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
 import { DeleteIcon } from "../../Constants/Icons/delete_icon";
+import Loader from "../../Components/AnimatedComponents/Loader/Loader";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -117,7 +118,7 @@ export default function Home() {
               <button className="note-submit-button" onClick={handleTaskWrite}>
                 {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                 {writeLoading ? (
-                  <div className="loader"></div>
+                  <Loader large= {true}/>
                 ) : (
                   ArrowIcon({ color: "#fff", size: 32 })
                 )}
@@ -171,7 +172,7 @@ export default function Home() {
                     >
                       {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                       {updateLoading === task.id ? (
-                        <div className="loader-small"></div>
+                        <Loader large= {false}/>
                       ) : (
                         ArrowIcon({ color: "#000", size: 16, direction: "up" })
                       )}
@@ -183,7 +184,7 @@ export default function Home() {
                     >
                       {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                       {deleteLoading === task.id ? (
-                        <div className="loader-small"></div>
+                        <Loader large= {false}/>
                       ) : (
                         DeleteIcon({ color: "#ff0000", size: 16 })
                       )}

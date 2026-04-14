@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowIcon } from "../../../../Constants/Icons/arrow_icon";
 import "./ContinueButton.css";
+import Loader from "../../../../Components/AnimatedComponents/Loader/Loader";
 
 export default function ContinueButton({
   loading,
@@ -13,7 +14,7 @@ export default function ContinueButton({
     <button className="continue-button" onClick={onClick}>
       <h2>{loading ? "Loading..." : "Continue"}</h2>
       {loading ? (
-        <div className="loader"></div>
+        <Loader large= {true}/>
       ) : (
         ArrowIcon({ color: "#fff", size: 32 })
       )}
