@@ -2,7 +2,7 @@ import githubLogo from "../../../../assets/images/github-logo.png";
 import "./GithubContainer.css";
 
 export default function GithubContainer(){
-    return <a href="https://github.com/Barez01" target="_blank" className="div3">
+    return <a href="https://github.com/Barez01" target="_blank" className="github-container">
             <h1>Follow me</h1>
             <p>
               If you find this project useful, <br />
