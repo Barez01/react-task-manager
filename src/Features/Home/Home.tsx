@@ -15,6 +15,7 @@ import { DeleteIcon } from "../../Constants/Icons/delete_icon";
 import Loader from "../../Components/AnimatedComponents/Loader/Loader";
 import ShimmerLoader from "./Components/ShimmerLoader/ShimmerLoader";
 import GithubContainer from "./Components/GithubContainer/GithubContainer";
+import NewTaskContainer from "./Components/NewTaskContainer/NewTaskContainer";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -89,30 +90,7 @@ export default function Home() {
     <section className="home">
       <div className="blur-component">
         <div className="parent">
-          <div className="div1 animated-border">
-            <img src={botImage} alt="" />
-            <h4>
-              Hello, what is on your <br />
-              mind today?
-            </h4>
-            <div className="note-form">
-              <input
-                type="text"
-                className="description-field"
-                placeholder="Type something..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-              <button className="note-submit-button" onClick={handleTaskWrite}>
-                {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
-                {writeLoading ? (
-                  <Loader large={true} />
-                ) : (
-                  ArrowIcon({ color: "#fff", size: 32 })
-                )}
-              </button>
-            </div>
-          </div>
+          <NewTaskContainer />
           {readLoading ? (
             <ShimmerLoader />
           ) : (
