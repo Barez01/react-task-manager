@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./Components/Login.css";
 import { useState, useEffect } from "react";
-import { loginUser, setError } from "../Auth/Redux/AuthReducer";
+import { loginUser, clearError } from "../Auth/Redux/AuthReducer";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ROUTES } from "../../Router/Routes";
-import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
-import { CheckIcon } from "../../Constants/Icons/check_icon";
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
 import AuthLeftComponent from "./Components/AuthLeftComponent/AuthLeftComponent";
 import ContinueButton, {
@@ -26,6 +24,7 @@ export default function Login() {
   };
 
   useEffect(() => {
+    dispatch(clearError());
     if (user !== null) {
       navigate(ROUTES.HOME.path);
     }
@@ -57,7 +56,7 @@ export default function Login() {
 
           <div className="divider"></div>
 
-          <OtherButton route={ROUTES.SIGNUP.path} />
+          <OtherButton label="Create new account" route={ROUTES.SIGNUP.path} />
         </div>
       </div>
       {error && <ErrorDialog message={error} />}

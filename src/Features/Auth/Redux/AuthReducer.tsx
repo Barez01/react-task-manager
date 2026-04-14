@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 interface User {
   id: string;
   username: string;
-  name: string,
+  name: string;
   token: string;
 }
 
@@ -45,9 +45,11 @@ export const loginUser = createAsyncThunk<
 >("auth/loginUser", async (userData, thunkAPI) => {
   try {
     if (!userData.username || !userData.password) {
-    return thunkAPI.rejectWithValue("Username and password are required");
-  }
-  
+      return thunkAPI.rejectWithValue(
+        "Please provide a username and a password to continue logging into Notefy app fast and smooth",
+      );
+    }
+
     const response = await axios.post("http://localhost:5000/login", userData);
 
     Cookies.set("access_token", response.data.access_token);
@@ -57,7 +59,7 @@ export const loginUser = createAsyncThunk<
     return response.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(
-      error.response?.data?.message || "Login failed"
+      error.response?.data?.message || "Login failed",
     );
   }
 });
@@ -69,10 +71,13 @@ export const signupUser = createAsyncThunk<
 >("auth/signupUser", async (userData, thunkAPI) => {
   try {
     if (!userData.name || !userData.username || !userData.password) {
-  return thunkAPI.rejectWithValue("All fields are required");
-}
+      return thunkAPI.rejectWithValue("All fields are required");
+    }
 
-    const response = await axios.post("http://localhost:5000/register", userData);
+    const response = await axios.post(
+      "http://localhost:5000/register",
+      userData,
+    );
 
     Cookies.set("access_token", response.data.access_token);
     Cookies.set("name", response.data.token);
@@ -81,7 +86,7 @@ export const signupUser = createAsyncThunk<
     return response.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(
-      error.response?.data?.message || "Login failed"
+      error.response?.data?.message || "Login failed",
     );
   }
 });
@@ -94,14 +99,14 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      Cookies.remove('access_token');
+      Cookies.remove("access_token");
     },
     setError: (state, action) => {
-    state.error = action.payload;
-  },
-  clearError: (state) => {
-    state.error = null;
-  }
+      state.error = action.payload;
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder

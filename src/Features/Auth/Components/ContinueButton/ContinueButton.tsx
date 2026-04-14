@@ -22,11 +22,11 @@ export default function ContinueButton({
   );
 }
 
-export function OtherButton({ route }: { route: string }) {
+export function OtherButton({ label, route }: { label:string, route: string }) {
   const navigate = useNavigate();
   return (
     <button className="other-button" onClick={() => navigate(route)}>
-      <h2>Create Account</h2>
+      <h2>{label}</h2>
       {ArrowIcon({ color: "#000", size: 32 })}
     </button>
   );
