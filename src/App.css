@@ -20,7 +20,7 @@
 
 @font-face {
   font-family: "Inter";
-  src: local("Inter"), url("../src/assets/fonts/Inter-28pt-SemiBold.ttf") format("truetype");
+  src: local("Inter"), url("../src/assets/fonts/Inter_28pt-SemiBold.ttf") format("truetype");
   font-weight: 500;
 }
 

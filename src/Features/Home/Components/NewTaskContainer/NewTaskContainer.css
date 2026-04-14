@@ -9,8 +9,8 @@
 
 .home .new-task-container img {
   border-radius: 50%;
-  width: 50%;
-  aspect-ratio: 1 / 1;
+  /* width: 50%;
+  aspect-ratio: 1 / 1; */
   object-fit: cover;
 }
 
@@ -56,4 +56,66 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+:root {
+  --gradient-shadow: linear-gradient(
+    45deg,
+    #db80c2,
+    #a4eaf8,
+    #db80c2,
+    #a4eaf8,
+    #db80c2,
+    #a4eaf8,
+    #db80c2,
+    #a4eaf8,
+    #db80c2,
+    #a4eaf8
+  );
+}
+
+.shadow {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+}
+.shadow:before,
+.shadow:after {
+  width: 50%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background: var(--gradient-shadow);
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: animate 20s linear infinite;
+}
+
+.shadow:after {
+  filter: blur(20px);
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 300% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
