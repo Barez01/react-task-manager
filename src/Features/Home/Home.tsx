@@ -14,6 +14,7 @@ import {
 import ErrorDialog from "../../Components/Dialogs/error_dialog";
 import { DeleteIcon } from "../../Constants/Icons/delete_icon";
 import Loader from "../../Components/AnimatedComponents/Loader/Loader";
+import ShimmerLoader from "./Components/ShimmerLoader/ShimmerLoader";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -80,12 +81,6 @@ export default function Home() {
     }
   };
 
-  // useEffect(() => {
-  //   if (user !== null) {
-  //     navigate(ROUTES.HOME.path);
-  //   }
-  // }, [user !== null, navigate]);
-
   useEffect(() => {
     dispatch(readTasks());
   }, [dispatch]);
@@ -101,13 +96,6 @@ export default function Home() {
               mind today?
             </h4>
             <div className="note-form">
-              {/* <input
-            type="text"
-            className="title-field"
-            placeholder="Title here..."
-            // value={username}
-            // onChange={(e) => setUsername(e.target.value)}
-          /> */}
               <input
                 type="text"
                 className="description-field"
@@ -118,40 +106,15 @@ export default function Home() {
               <button className="note-submit-button" onClick={handleTaskWrite}>
                 {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                 {writeLoading ? (
-                  <Loader large= {true}/>
+                  <Loader large={true} />
                 ) : (
                   ArrowIcon({ color: "#fff", size: 32 })
                 )}
               </button>
             </div>
           </div>
-          {readLoading ? (
-            <div className="shimmer-loader">
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-              <div className=""></div>
-            </div>
+          {!readLoading ? (
+            <ShimmerLoader />
           ) : (
             <div className="div2">
               {tasks.map((task) => (
@@ -172,7 +135,7 @@ export default function Home() {
                     >
                       {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                       {updateLoading === task.id ? (
-                        <Loader large= {false}/>
+                        <Loader large={false} />
                       ) : (
                         ArrowIcon({ color: "#000", size: 16, direction: "up" })
                       )}
@@ -184,7 +147,7 @@ export default function Home() {
                     >
                       {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                       {deleteLoading === task.id ? (
-                        <Loader large= {false}/>
+                        <Loader large={false} />
                       ) : (
                         DeleteIcon({ color: "#ff0000", size: 16 })
                       )}
