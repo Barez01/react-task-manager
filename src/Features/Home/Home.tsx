@@ -1,6 +1,5 @@
 import "./Components/Home.css";
 import botImage from "../../assets/images/bot.png";
-import githubLogo from "../../assets/images/github-logo.png";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { useState, useEffect } from "react";
@@ -15,6 +14,7 @@ import ErrorDialog from "../../Components/Dialogs/error_dialog";
 import { DeleteIcon } from "../../Constants/Icons/delete_icon";
 import Loader from "../../Components/AnimatedComponents/Loader/Loader";
 import ShimmerLoader from "./Components/ShimmerLoader/ShimmerLoader";
+import GithubContainer from "./Components/GithubContainer/GithubContainer";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -113,7 +113,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          {!readLoading ? (
+          {readLoading ? (
             <ShimmerLoader />
           ) : (
             <div className="div2">
@@ -164,16 +164,7 @@ export default function Home() {
               ))}
             </div>
           )}
-          <a href="https://github.com/Barez01" target="_blank" className="div3">
-            <h1>Follow me</h1>
-            <p>
-              If you find this project useful, <br />
-              you can follow me
-            </p>
-            <div className="image-container">
-              <img src={githubLogo} alt="" />
-            </div>
-          </a>
+          <GithubContainer />
         </div>
       </div>
       {error && <ErrorDialog message={error} />}

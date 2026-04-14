@@ -164,20 +164,20 @@
 
 .home .div3 h1 {
   margin-top: auto;
-  font-size: 30px;
+  font-size: 4vh;
 }
 
 .home .div3 p {
-  font-size: 12px;
+  font-size: 1.5vh;
   text-align: center;
 }
 
 .home .div3 .image-container {
   background-color: #f49c90;
-  border-radius: 50px;
-  width: 75px;
-  height: 75px;
-  padding: 15px;
+  border-radius: 4vh;
+  width: 8vh;
+  height: 8vh;
+  padding: 1.5vh;
   margin: auto 0;
   transition: all ease 0.2s;
 }
