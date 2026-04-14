@@ -1,4 +1,4 @@
-.div1 {
+.new-task-container {
   grid-row: span 5 / span 5;
   border-radius: 20px;
   display: flex;
@@ -7,21 +7,21 @@
   padding-top: 12.5%;
 }
 
-.home .div1 img {
+.home .new-task-container img {
   border-radius: 50%;
   width: 50%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
-.home .div1 h4 {
+.home .new-task-container h4 {
   text-align: center;
   color: rgba(255, 255, 255, 0.37);
   margin-top: 20px;
   font-size: 18px;
 }
 
-.home .div1 .note-form {
+.home .new-task-container .note-form {
   height: 70px;
   /* margin-top: auto; */
   display: flex;
@@ -34,7 +34,7 @@
   margin: auto 20px 20px 20px;
 }
 
-.home .div1 .note-form input {
+.home .new-task-container .note-form input {
   width: calc(100% - 60px);
   padding: 20px;
   /* margin-bottom: 15px; */
@@ -48,7 +48,7 @@
   font-size: 16px;
 }
 
-.home .div1 .note-form .note-submit-button {
+.home .new-task-container .note-form .note-submit-button {
   width: 60px;
   height: 60px;
   background-color: black;

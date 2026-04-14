@@ -27,7 +27,7 @@ export default function NewTaskContainer() {
   };
 
   return (
-    <div className="div1 animated-border">
+    <div className="new-task-container animated-border">
       <img src={botImage} alt="" />
       <h4>
         Hello, what is on your <br />

@@ -1,11 +1,8 @@
 import "./Components/Home.css";
-import botImage from "../../assets/images/bot.png";
 import { ArrowIcon } from "../../Constants/Icons/arrow_icon";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
-  writeTask,
-  setError,
   readTasks,
   updateTask,
   deleteTask,
@@ -20,29 +17,12 @@ import NewTaskContainer from "./Components/NewTaskContainer/NewTaskContainer";
 export default function Home() {
   const dispatch = useAppDispatch();
   const {
-    writeLoading,
     readLoading,
     updateLoading,
     deleteLoading,
     error,
     tasks,
   } = useAppSelector((state) => state.home);
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleTaskWrite = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const result = await dispatch(
-      writeTask({ id: 0, title, description, date: "" }),
-    );
-
-    if (writeTask.fulfilled.match(result)) {
-      dispatch(readTasks());
-      setDescription("");
-    }
-  };
 
   const handleTaskUpdate = async (
     e: React.FormEvent,
@@ -54,7 +34,7 @@ export default function Home() {
     const result = await dispatch(
       updateTask({
         id: id,
-        title: title,
+        title: "",
         description: newDescription,
         date: "",
       }),
@@ -111,7 +91,6 @@ export default function Home() {
                         handleTaskUpdate(e, task.id, updatedText ?? "");
                       }}
                     >
-                      {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                       {updateLoading === task.id ? (
                         <Loader large={false} />
                       ) : (
@@ -123,7 +102,6 @@ export default function Home() {
                       disabled={deleteLoading === task.id}
                       onClick={(e) => handleTaskDelete(e, task.id)}
                     >
-                      {/* <h2>{false ? "Loading..." : "Continue"}</h2> */}
                       {deleteLoading === task.id ? (
                         <Loader large={false} />
                       ) : (
