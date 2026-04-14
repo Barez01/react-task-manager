@@ -149,39 +149,4 @@
   word-break: break-word;
 }
 
-.home .div3 {
-  grid-row: span 2 / span 2;
-  grid-row-start: 6;
-  background-color: #eb6351;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  padding: auto 20px;
-}
 
-.home .div3 h1 {
-  margin-top: auto;
-  font-size: 4vh;
-}
-
-.home .div3 p {
-  font-size: 1.5vh;
-  text-align: center;
-}
-
-.home .div3 .image-container {
-  background-color: #f49c90;
-  border-radius: 4vh;
-  width: 8vh;
-  height: 8vh;
-  padding: 1.5vh;
-  margin: auto 0;
-  transition: all ease 0.2s;
-}
-
-.home .div3:hover .image-container {
-  padding: 0;
-}

@@ -1,4 +1,5 @@
 import githubLogo from "../../../../assets/images/github-logo.png";
+import "./GithubContainer.css";
 
 export default function GithubContainer(){
     return <a href="https://github.com/Barez01" target="_blank" className="div3">
