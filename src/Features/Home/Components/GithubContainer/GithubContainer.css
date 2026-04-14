@@ -13,20 +13,22 @@
 
 .home .github-container h1 {
   margin-top: auto;
-  font-size: 4vh;
+  font-size: 3vh;
+  font-weight: 600;
 }
 
 .home .github-container p {
-  font-size: 1.5vh;
+  font-size: 1.2vh;
   text-align: center;
+  font-weight: lighter;
 }
 
 .home .github-container .image-container {
   background-color: #f49c90;
-  border-radius: 4vh;
-  width: 8vh;
-  height: 8vh;
-  padding: 1.5vh;
+  border-radius: 3.5vh;
+  width: 7vh;
+  height: 7vh;
+  padding: 1.2vh;
   margin: auto 0;
   transition: all ease 0.2s;
 }
