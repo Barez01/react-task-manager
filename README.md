@@ -1,6 +1,6 @@
 # Notefy App (Web App)
 
-A High level React application built for managing daily tasks. Written in typescript and has full clean code and architecute.
+A High level React & Node JS application built for managing daily tasks. Written in Typescript & Javascript with full clean code and architecute.
 
 ## Features
 - Built with React 
