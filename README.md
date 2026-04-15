@@ -19,7 +19,7 @@ A High level React application built for managing daily tasks. Written in typesc
    git clone https://github.com/Barez01/react-task-manager.git
 3. **Navigate to the project directory**  
    ```sh
-   cd blue_planet
+   cd react-task-manager
 4. **Install dependencies**  
    ```sh
    npm install
