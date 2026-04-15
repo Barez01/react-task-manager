@@ -1,4 +1,4 @@
-# Blue Planet
+# Notefy App (Web App)
 
 A High level React application built for managing daily tasks. Written in typescript and has full clean code and architecute.
 
